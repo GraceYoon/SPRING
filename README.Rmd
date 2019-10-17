@@ -1,0 +1,28 @@
+---
+  output:
+  md_document:
+  variant: markdown_github
+---
+  
+  <!-- README.md is generated from README.Rmd. Please edit that file -->
+  
+  ```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# SPRING: Semi-Parametric Rank-based approach for INference in Graphical model
+
+The R package `SPRING` estimate sparse microbial association networks using rank-based correlation with sparse graphical modeling techniques. The corresponding reference is
+
+["Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data"](https://www.frontiersin.org/articles/10.3389/fgene.2019.00516/full) by Yoon, Gaynanova, M&uuml;ller (2019) *Frontiers in Genetics* 10:516.
+
+
+## Installation
+
+```{install}
+devtools::install_github("GraceYoon/SPRING")
+```
