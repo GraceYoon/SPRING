@@ -1,28 +1,38 @@
 ---
-  output:
-  md_document:
-  variant: markdown_github
+output: github_document
 ---
-  
-  <!-- README.md is generated from README.Rmd. Please edit that file -->
-  
-  ```{r, echo = FALSE}
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 ```
+# SPRING
 
-# SPRING: Semi-Parametric Rank-based approach for INference in Graphical model
+<!-- badges: start -->
+<!-- badges: end -->
 
-The R package `SPRING` estimate sparse microbial association networks using rank-based correlation with sparse graphical modeling techniques. The corresponding reference is
+The R package `SPRING` (Semi-Parametric Rank-based approach for INference in Graphical model) estimate sparse microbial association networks using rank-based correlation with sparse graphical modeling techniques. The corresponding reference is
 
 ["Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data"](https://www.frontiersin.org/articles/10.3389/fgene.2019.00516/full) by Yoon, Gaynanova, M&uuml;ller (2019) *Frontiers in Genetics* 10:516.
 
-
 ## Installation
 
-```{install}
+``` r
+# install.packages("devtools")
 devtools::install_github("GraceYoon/SPRING")
 ```
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(SPRING)
+## basic example code
+```
+
