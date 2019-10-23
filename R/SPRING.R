@@ -21,10 +21,8 @@
 #'
 #' @export
 #'
-#' @examples
-#' library(SpiecEasi)
-#' data(amgut1.filt)
-#' fit <- SPRING(data = amgut1.filt[, 1:10], quantitative = FALSE, nlambda = 20, rep.num = 10)
+#' @example man/examples/ex.R
+#'
 SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio = 1e-2, nlambda = 50, lambdaseq = NULL, seed = 10010, ncores = 2, thresh = 0.1, subsample.ratio = 0.8, rep.num = 50){
   p <- ncol(data)
   if (quantitative){
