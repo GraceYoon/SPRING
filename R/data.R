@@ -1,4 +1,4 @@
-#' Synthetic data
+#' Synthetic count data
 #' @name SynthData
 #' @description  SynthData and SynthData2 were generated using empirical cdf of American Gut Project Data. SynthData has scale_free-type-graph structure of size 500 rows and 200 columns, and SynthData2 has cluster-type-graph structure of size 1000 rows and 100 columns.
 #'
@@ -9,14 +9,14 @@
 "SynthData"
 
 
-#' Synthetic data 2
+
 #' @name SynthData
 #' @aliases SynthData2
 "SynthData2"
 
 #' Quantitative Microbiome Project data
 #'
-#' @description  The data containing quantitative microbiome count data of dimenstion 106 samples (in rows) and 91 OTUs (in columns).
+#' @description  The data containing quantitative microbiome count data of dimenstion 106 samples/subjects (in rows) and 91 OTUs (in columns). The raw dataset is pruned the taxa present less than 30\% of samples and final dataset contains only healthy subjects from two cohorts: Study cohort and Disease cohort.
 #'
 #' @source
 #'

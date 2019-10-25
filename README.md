@@ -25,6 +25,13 @@ library(SPRING)
 data("QMP") # load saved synthetic count data in this package, of dimension n = 1000 and p = 100
 
 # SPRING on Synthetic Data, when assuming the data as quantitative counts
-fit.spring <- SPRING(QMP, quantitative = TRUE, nlambda = 10, rep.num = 10)
-# for now, it takes around 5 minutes. We're working on reducing the computation time.
+fit.spring <- SPRING(QMP, quantitative = TRUE, lambdaseq = "data-specific", nlambda = 50, rep.num = 50)
+# This takes around 23 minutes. We are working on reducing the computation time (10/25/2019).
+
+# StARS-selected lambda index based on the threshold (default = 0.01)
+opt.K <- fit.spring$output$stars$opt.index
+# Estimated adjacency matrix from sparse graphical modeling technique ("mb" method) (1 = edge, 0 = no edge)
+adj.K <- as.matrix(fit.spring$fit$est$path[[opt.K]])
+# Estimated partial correlation coefficient, same as negative precision matrix.
+pcor.K <- as.matrix(SpiecEasi::symBeta(fit.spring$output$est$beta[[opt.K]], mode='maxabs'))
 ```

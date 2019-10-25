@@ -14,6 +14,6 @@ Vanderputte et al. (2017) Quantitative microbiome profiling links gut community 
 QMP
 }
 \description{
-The data containing quantitative microbiome count data of dimenstion 106 samples (in rows) and 91 OTUs (in columns).
+The data containing quantitative microbiome count data of dimenstion 106 samples/subjects (in rows) and 91 OTUs (in columns). The raw dataset is pruned the taxa present less than 30\% of samples and final dataset contains only healthy subjects from two cohorts: Study cohort and Disease cohort.
 }
 \keyword{datasets}

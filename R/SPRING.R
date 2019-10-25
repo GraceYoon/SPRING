@@ -56,7 +56,7 @@ SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio =
   }
   p <- ncol(data)
   if (quantitative){
-    if (max(rowSums(data)) <= 1 | all.equal(max(rowSums(data)), 1)){
+    if (max(rowSums(data)) <= 1 | isTRUE(all.equal(max(rowSums(data)), 1))){
       warning("The input data is normalized, but quantitative count data is expected.\n")
     }
     qdat <- data
