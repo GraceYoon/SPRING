@@ -22,7 +22,7 @@ Example
 
 ``` r
 library(SPRING)
-data("QMP") # load the data available from this package.
+data("QMP") # load the data available from this package, containing 106 samples and 91 OTUs.
 
 # Apply SPRING on QMP data.
 fit.spring <- SPRING(QMP, quantitative = TRUE, lambdaseq = "data-specific", nlambda = 50, rep.num = 50)
@@ -31,7 +31,7 @@ fit.spring <- SPRING(QMP, quantitative = TRUE, lambdaseq = "data-specific", nlam
 # StARS-selected lambda index based on the threshold (default = 0.01)
 opt.K <- fit.spring$output$stars$opt.index
 # Estimated adjacency matrix from sparse graphical modeling technique ("mb" method) (1 = edge, 0 = no edge)
-adj.K <- fit.spring$fit$est$path[[opt.K]]
+adj.K <- as.matrix(fit.spring$fit$est$path[[opt.K]])
 # Estimated partial correlation coefficient, same as negative precision matrix.
-pcor.K <- SpiecEasi::symBeta(fit.spring$output$est$beta[[opt.K]], mode = 'maxabs')
+pcor.K <- as.matrix(SpiecEasi::symBeta(fit.spring$output$est$beta[[opt.K]], mode = 'maxabs'))
 ```
