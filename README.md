@@ -22,13 +22,9 @@ Example
 
 ``` r
 library(SPRING)
-data("SynthData2") # load saved synthetic count data in this package, of dimension n = 1000 and p = 100
+data("QMP") # load saved synthetic count data in this package, of dimension n = 1000 and p = 100
 
 # SPRING on Synthetic Data, when assuming the data as quantitative counts
-# This takes around 511 seconds
-fit.spring <- SPRING(SynthData2, quantitative = TRUE, nlambda = 10, rep.num = 10)
-
-# SPRING on Compositional data. Row sums are scaled to 1.
-compoData <- SynthData2/rowSums(SynthData2)
-fit.spring <- SPRING(compoData, quantitative = FALSE, nlambda = 10, rep.num = 10)
+fit.spring <- SPRING(QMP, quantitative = TRUE, nlambda = 10, rep.num = 10)
+# for now, it takes around 5 minutes. We're working on reducing the computation time.
 ```

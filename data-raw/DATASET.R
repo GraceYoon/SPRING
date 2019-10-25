@@ -43,3 +43,17 @@ n <- 1000; p1 <- 100
     SynthData2 <- synthData_from_ecdf(get(paste0("amgutsim_p", p1)), Sigma = Cor1, n = n, seed = seed)
 
     usethis::use_data(SynthData2)
+
+
+
+
+load("../copulaMicrobiome/Analysis/SimpleEx/qmphealthyrank6pruned.rdata")
+# this containing three data variable:
+# X: copyadjusted count data
+# QMP: quantitative count data (X -> RMP by dividing by total abundance -> QMP by multiplying by cell counts)
+# qmphealthy6_only1filt: phyloseq class data.
+
+### But only save QMP for this package.
+usethis::use_data(QMP)
+
+

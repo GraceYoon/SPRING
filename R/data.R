@@ -1,10 +1,27 @@
-#' This is a Synthetic count data to be included in this package. Generated using empirical cdf of American Gut Project Data with scale_free graph type.
+#' Synthetic data
+#' @name SynthData
+#' @description  SynthData and SynthData2 were generated using empirical cdf of American Gut Project Data. SynthData has scale_free-type-graph structure of size 500 rows and 200 columns, and SynthData2 has cluster-type-graph structure of size 1000 rows and 100 columns.
 #'
-#' @format A matrix of dimension with 500 rows and 200 columns.
+#' @source
+#'
+#' Yoon, Gaynanova and Müller (2019) Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data. \emph{Frontiers in Genetics.} 10:516. \url{doi:10.3389/fgene.2019.00516}
+#' @format \code{SynthData} is an object of class \code{matrix} with 500 rows and 200 columns. \code{SynthData2} is an object of class \code{matrix} with 1000 rows and 100 columns.
 "SynthData"
 
-#' This is a Synthetic count data to be included in this package. Generated using empirical cdf of American Gut Project Data with cluster graph type.
-#'
-#' @format A matrix of dimension with 1000 rows and 100 columns.
+
+#' Synthetic data 2
+#' @name SynthData
+#' @aliases SynthData2
 "SynthData2"
 
+#' Quantitative Microbiome Project data
+#'
+#' @description  The data containing quantitative microbiome count data of dimenstion 106 samples (in rows) and 91 OTUs (in columns).
+#'
+#' @source
+#'
+#' Yoon, Gaynanova and Müller (2019) Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data. \emph{Frontiers in Genetics}. 10:516. \url{doi:10.3389/fgene.2019.00516}
+#'
+#' Vanderputte et al. (2017) Quantitative microbiome profiling links gut community variation to microbial load. \emph{Nature}. 551: 507-511. \url{doi:10.1038/nature24460}
+#'
+"QMP"

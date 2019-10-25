@@ -3,12 +3,18 @@
 \docType{data}
 \name{SynthData}
 \alias{SynthData}
-\title{This is a Synthetic count data to be included in this package. Generated using empirical cdf of American Gut Project Data with scale_free graph type.}
-\format{A matrix of dimension with 500 rows and 200 columns.}
+\alias{SynthData2}
+\title{Synthetic data}
+\format{\code{SynthData} is an object of class \code{matrix} with 500 rows and 200 columns. \code{SynthData2} is an object of class \code{matrix} with 1000 rows and 100 columns.}
+\source{
+Yoon, Gaynanova and Müller (2019) Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data. \emph{Frontiers in Genetics.} 10:516. \url{doi:10.3389/fgene.2019.00516}
+}
 \usage{
 SynthData
+
+SynthData2
 }
 \description{
-This is a Synthetic count data to be included in this package. Generated using empirical cdf of American Gut Project Data with scale_free graph type.
+SynthData and SynthData2 were generated using empirical cdf of American Gut Project Data. SynthData has scale_free-type-graph structure of size 500 rows and 200 columns, and SynthData2 has cluster-type-graph structure of size 1000 rows and 100 columns.
 }
 \keyword{datasets}

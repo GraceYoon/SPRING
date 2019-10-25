@@ -2,16 +2,16 @@
 % Please edit documentation in R/SPRING.R
 \name{SPRING}
 \alias{SPRING}
-\title{SPRING main function
-Semi-Parametric Rank-based approach for INference in Graphical model. SPRING follows the neighborhood selection methodology outlined in "mb" Meinshausen and Buhlmann and}
+\title{Semi-Parametric Rank-based approach for INference in Graphical model (SPRING)}
 \usage{
 SPRING(data, quantitative = FALSE, method = "mb",
-  lambda.min.ratio = 0.01, nlambda = 50, lambdaseq = NULL,
-  seed = 10010, ncores = 2, thresh = 0.1, subsample.ratio = 0.8,
-  rep.num = 50)
+  lambda.min.ratio = 0.01, nlambda = 20,
+  lambdaseq = exp(seq(log(0.6), log(0.6 * lambda.min.ratio), length.out =
+  nlambda)), seed = 10010, ncores = 2, thresh = 0.1,
+  subsample.ratio = 0.8, rep.num = 20)
 }
 \arguments{
-\item{data}{n by p matrix of microbiome data. Each row represents each subject/sample and each column represents each OTU (operational taxonomic unit).}
+\item{data}{n by p matrix of microbiome count data, either quantitative or compositional counts. Each row represents each subject/sample and each column represents each OTU (operational taxonomic unit).}
 
 \item{quantitative}{default is FALSE, which means input "data" is compositional data, which will be normalized using mclr transformation within a function. If TRUE, it means "quantitative" counts are input and no normalization will be applied.}
 
@@ -19,45 +19,67 @@ SPRING(data, quantitative = FALSE, method = "mb",
 
 \item{lambda.min.ratio}{default is 0.01}
 
-\item{nlambda}{default is 50.}
+\item{nlambda}{default is 20.}
 
-\item{lambdaseq}{a sequence of decreasing positive numbers to control the regularization. Users can specify a sequence to override the default sequence.}
+\item{lambdaseq}{a sequence of decreasing positive numbers to control the regularization. The default sequence has 20 values generated to be equally spaced on a logarithmic scale from 0.6 to 0.006. Users can specify a sequence to override the default sequence. If user specify as "data-specific", then the lambda sequence will be generated using estimated rank-based correlation matrix from data.}
 
 \item{seed}{the seed for subsampling}
 
-\item{ncores}{number of cores to use subsampling}
+\item{ncores}{number of cores to use for subsampling.}
 
-\item{thresh}{threshold for StARS selection criterion. 0.1 is recommended.}
+\item{thresh}{threshold for StARS selection criterion. 0.1 is recommended (default). The smaller threshold returns sparser graph.}
 
 \item{subsample.ratio}{0.8 is default. The recommended values are 10*sqrt(n)/n for n > 144 or 0.8 otherwise.}
 
-\item{rep.num}{the repetition number of subsampling}
+\item{rep.num}{the repetition number of subsampling for StARS eddge stability selection. The default value is 20.}
 }
 \value{
 \code{SPRING} returns a data.frame containing
+\itemize{
+      \item{output: }{Output results of \code{pulsar::pulsar} based on StARS criterion. It contains:}
+              \itemize{
+                       \item{merge: } a list of length \code{nlambda} and each element of list contains a matrix of edge selection probability. Each lambda value, this edge selection probability is calculated across \code{rep.num}.
+                       \item{summary: } the summary statistic over \code{rep.num} graphs at each value of lambda
+                       \item{opt.index: } index (along the path) of optimal lambda selected by the criterion at the desired threshold. Will return \eqn{0} if no optimum is found or \code{NULL} if selection for the criterion is not implemented.
+                       \item{criterion: } we use StARS for our stability criterion.
+              }
+      \item{fit: }{Output results of \code{pulsar::refit} function. It contains:}
+      \itemize{
+              \item{est: } a data frame containing
+              \itemize{
+                       \item{beta: } Estimates of beta coefficient matrices (of size p by p) by "mb" method on the whole data at each of whole lambda sequence value.
+                       \item{path: } Estimates of precision matrix (of size p by p) on the whole data at each of whole lambda sequence value.
+              }
+              \item{refit: } final estimates of precision matrix (of size p by p).
+              }
+      \item{lambdaseq: }{lambda sequence used in the analysis}
+}
 }
 \description{
-SPRING main function
-Semi-Parametric Rank-based approach for INference in Graphical model. SPRING follows the neighborhood selection methodology outlined in "mb" Meinshausen and Buhlmann and
+SPRING follows the neighborhood selection methodology outlined in "mb" method (Meinshausen and Buhlmann (2006)).
 }
 \examples{
-# simple example
-
 rm(list = ls())
 library(SPRING)
 
 # Load the synthetic count data
-data("SynthData2") # n = 1000 and p = 100 synthetic dataset
+data("QMP") # n = 1000 and p = 100 synthetic dataset
 
-# SPRING on Synthetic Data, when assuming the data as quantitative counts
+# SPRING on Synthetic Data, when assuming the data as quantitative counts.
+# The same setting used in Yoon et al. (2019) Frontiers in Genetics.
 \dontrun{
-# This takes around 511 seconds
-fit.spring <- SPRING(SynthData2, quantitative = TRUE, nlambda = 10, rep.num = 10)
+# This takes around 23 minutes.
+fit.spring <- SPRING(QMP, quantitative = TRUE, nlambda = 50, seed = 10010, ncores = 2, rep.num = 50)
 }
 
-# SPRING on Compositional data. Row sums are scaled to 1.
+# SPRING on Compositional data. Row sums are scaled to 1. Then, mclr-transformation will be applied.
 \dontrun{
-compoData <- SynthData2/rowSums(SynthData2)
+compoData <- QMP/rowSums(QMP)
 fit.spring <- SPRING(compoData, quantitative = FALSE, nlambda = 10, rep.num = 10)
 }
+}
+\references{
+Meinshausen N. and Buhlmann P. (2006) \href{https://projecteuclid.org/download/pdfview_1/euclid.aos/1152540754}{"High-dimensional graphs and variable selection with the lasso"}, \emph{The Annals of Statistics}, Vol 34, No. 3, 1436 - 1462.
+
+Yoon G., Gaynanova I. and Müller C. (2019) \href{https://www.frontiersin.org/articles/10.3389/fgene.2019.00516/full}{"Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data"}, \emph{Frontiers in Genetics}, 10:516.
 }

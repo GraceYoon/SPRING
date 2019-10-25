@@ -1,12 +1,20 @@
 Package: SPRING
 Title: Semi-Parametric Rank-based approach for INference in Graphical model (SPRING)
-Version: 0.0.1
-Authors@R: 
+Version: 1.0.0
+Authors@R: c(
     person(given = "Grace",
            family = "Yoon",
            role = c("aut", "cre"),
            email = "gyoon@stat.tamu.edu",
-           comment = c(ORCID = "0000-0003-3263-1352"))
+           comment = c(ORCID = "0000-0003-3263-1352")),
+    person(given = "Irina",
+           family = "Gaynanova",
+           role = c("aut"),
+           email = "irinag@stat.tamu.edu"),
+    person(given = "Christian",
+           family = "Müller",
+           role = c("aut"),
+           email = "cmueller@flatironinstitute.org"))
 Description: SPRING is to estimate sparse microbial association networks using rank-based correlation with sparse graphical modeling techniques.
 License: GPL-3
 Encoding: UTF-8
