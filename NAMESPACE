@@ -3,7 +3,6 @@
 export(SPRING)
 export(hugeKmb)
 export(mclr)
-import(SpiecEasi)
 importFrom(huge,huge.mb)
 importFrom(mixedCCA,estimateR)
 importFrom(pulsar,pulsar)

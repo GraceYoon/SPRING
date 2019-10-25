@@ -51,9 +51,9 @@ hugeKmb <- function(data, lambda, type = "trunc", sym = "or", verbose = TRUE) {
 #' @export
 #'
 #' @examples
-#' library(SpiecEasi)
-#' data(amgut1.filt)
-#' ndata <- mclr(amgut1.filt)
+#' data(QMP)
+#' RMP <- QMP/rowSums(QMP)
+#' mclr_RMP <- mclr(RMP)
 #'
 mclr <- function(dat, base = exp(1), tol = 1e-16, eps = NULL, atleast = 1){
   dat <- as.matrix(dat)

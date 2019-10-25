@@ -37,7 +37,6 @@
 #' @importFrom huge huge.mb
 #' @importFrom pulsar pulsar
 #' @importFrom mixedCCA estimateR
-#' @import SpiecEasi
 #'
 #' @export
 #'
