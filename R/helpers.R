@@ -15,7 +15,9 @@
 #' @param lambda a vector of lambda values
 #' @param type a type of variables. "trunc" is default.
 #' @param sym "or" is the symmetrizing rule of the output graphs. If sym = "and", the edge between node i and node j is selected ONLY when both node i and node j are selected as neighbors for each other. If sym = "or", the edge is selected when either node i or node j is selected as the neighbor for each other. The default value is "or". (refer to huge manual)
-#' @param verbose default is TRUE.
+#' @param verbose If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.
+#' @param verboseR If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not is disabled. The defalut value is TRUE.
+#' @param tol Desired accuracy when calculating the solution of bridge function in estimateR function.
 #'
 #' @return \code{hugeKmb} returns a data.frame containing
 #' \itemize{
@@ -27,8 +29,8 @@
 #' @importFrom huge huge.mb
 #' @export
 #'
-hugeKmb <- function(data, lambda, type = "trunc", sym = "or", verbose = TRUE) {
-  S    <- mixedCCA::estimateR(data, type = type)$R
+hugeKmb <- function(data, lambda, type = "trunc", sym = "or", verbose = TRUE, verboseR = TRUE, tol = 1e-6) {
+  S    <- mixedCCA::estimateR(data, type = type, tol = tol, verbose = verboseR)$R
   est  <- huge::huge.mb(S, lambda, sym = sym, verbose = verbose)
   est
 }

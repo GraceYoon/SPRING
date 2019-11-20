@@ -8,11 +8,14 @@
 #' @param lambda.min.ratio default is 0.01
 #' @param nlambda default is 20.
 #' @param lambdaseq a sequence of decreasing positive numbers to control the regularization. The default sequence has 20 values generated to be equally spaced on a logarithmic scale from 0.6 to 0.006. Users can specify a sequence to override the default sequence. If user specify as "data-specific", then the lambda sequence will be generated using estimated rank-based correlation matrix from data.
-#' @param seed the seed for subsampling
-#' @param ncores number of cores to use for subsampling.
+#' @param seed the seed for subsampling.
+#' @param ncores number of cores to use for subsampling. The default is 1.
 #' @param thresh threshold for StARS selection criterion. 0.1 is recommended (default). The smaller threshold returns sparser graph.
 #' @param subsample.ratio 0.8 is default. The recommended values are 10*sqrt(n)/n for n > 144 or 0.8 otherwise.
 #' @param rep.num the repetition number of subsampling for StARS eddge stability selection. The default value is 20.
+#' @param Rtol Desired accuracy when calculating the solution of bridge function in estimateR function.
+#' @param verbose If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.
+#' @param verboseR If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not when calculating rank-based correlation matrices is disabled. The defalut value is FALSE.
 #'
 #' @return \code{SPRING} returns a data.frame containing
 #' \itemize{
@@ -48,7 +51,7 @@
 #'
 #' @example man/examples/ex.R
 #'
-SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio = 1e-2, nlambda = 20, lambdaseq = exp(seq(log(0.6), log(0.6*lambda.min.ratio), length.out = nlambda)), seed = 10010, ncores = 2, thresh = 0.1, subsample.ratio = 0.8, rep.num = 20){
+SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio = 1e-2, nlambda = 20, lambdaseq = exp(seq(log(0.6), log(0.6*lambda.min.ratio), length.out = nlambda)), seed = 10010, ncores = 1, thresh = 0.1, subsample.ratio = 0.8, rep.num = 20, Rtol = 1e-6, verbose = TRUE, verboseR = FALSE){
 
   if (any(data < 0)) {
     stop("Negative values are detected, but either quantitative or compositional counts are expected.\n")
@@ -67,7 +70,7 @@ SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio =
 
   if(is.character(lambdaseq)){
     if(lambdaseq == "data-specific"){
-      suppressMessages(Kcor <- mixedCCA::estimateR(qdat, type = "trunc")$R)
+      Kcor <- mixedCCA::estimateR(qdat, type = "trunc", tol = Rtol, verbose = verboseR)$R
       # generate lambda sequence
       lambda.max <- max(max(Kcor-diag(p)), -min(Kcor-diag(p)))
       lambda.min <- lambda.min.ratio * lambda.max
@@ -81,7 +84,7 @@ SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio =
     fun <- hugeKmb
   }
 
-  out1.K_count <- pulsar::pulsar(qdat, fun = fun, fargs = list(lambda = lambdaseq), rep.num = rep.num, criterion = 'stars', seed = seed, ncores = ncores, thresh = thresh, subsample.ratio = subsample.ratio)
+  out1.K_count <- pulsar::pulsar(qdat, fun = fun, fargs = list(lambda = lambdaseq, tol = Rtol, verbose = verbose, verboseR = verboseR), rep.num = rep.num, criterion = 'stars', seed = seed, ncores = ncores, thresh = thresh, subsample.ratio = subsample.ratio)
 
   fit1.K_count <- pulsar::refit(out1.K_count)
 

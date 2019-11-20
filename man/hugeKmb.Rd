@@ -4,7 +4,8 @@
 \alias{hugeKmb}
 \title{Internal wrapper function to implement rank-based correlation to huge.mb function in "huge" package.}
 \usage{
-hugeKmb(data, lambda, type = "trunc", sym = "or", verbose = TRUE)
+hugeKmb(data, lambda, type = "trunc", sym = "or", verbose = TRUE,
+  verboseR = TRUE, tol = 1e-06)
 }
 \arguments{
 \item{data}{n by p matrix data. usually through pulsar, data will receive subsamples.}
@@ -15,7 +16,11 @@ hugeKmb(data, lambda, type = "trunc", sym = "or", verbose = TRUE)
 
 \item{sym}{"or" is the symmetrizing rule of the output graphs. If sym = "and", the edge between node i and node j is selected ONLY when both node i and node j are selected as neighbors for each other. If sym = "or", the edge is selected when either node i or node j is selected as the neighbor for each other. The default value is "or". (refer to huge manual)}
 
-\item{verbose}{default is TRUE.}
+\item{verbose}{If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.}
+
+\item{verboseR}{If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not is disabled. The defalut value is TRUE.}
+
+\item{tol}{Desired accuracy when calculating the solution of bridge function in estimateR function.}
 }
 \value{
 \code{hugeKmb} returns a data.frame containing

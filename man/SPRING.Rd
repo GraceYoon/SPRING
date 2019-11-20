@@ -7,8 +7,9 @@
 SPRING(data, quantitative = FALSE, method = "mb",
   lambda.min.ratio = 0.01, nlambda = 20,
   lambdaseq = exp(seq(log(0.6), log(0.6 * lambda.min.ratio), length.out =
-  nlambda)), seed = 10010, ncores = 2, thresh = 0.1,
-  subsample.ratio = 0.8, rep.num = 20)
+  nlambda)), seed = 10010, ncores = 1, thresh = 0.1,
+  subsample.ratio = 0.8, rep.num = 20, Rtol = 1e-06,
+  verbose = TRUE, verboseR = FALSE)
 }
 \arguments{
 \item{data}{n by p matrix of microbiome count data, either quantitative or compositional counts. Each row represents each subject/sample and each column represents each OTU (operational taxonomic unit).}
@@ -23,15 +24,21 @@ SPRING(data, quantitative = FALSE, method = "mb",
 
 \item{lambdaseq}{a sequence of decreasing positive numbers to control the regularization. The default sequence has 20 values generated to be equally spaced on a logarithmic scale from 0.6 to 0.006. Users can specify a sequence to override the default sequence. If user specify as "data-specific", then the lambda sequence will be generated using estimated rank-based correlation matrix from data.}
 
-\item{seed}{the seed for subsampling}
+\item{seed}{the seed for subsampling.}
 
-\item{ncores}{number of cores to use for subsampling.}
+\item{ncores}{number of cores to use for subsampling. The default is 1.}
 
 \item{thresh}{threshold for StARS selection criterion. 0.1 is recommended (default). The smaller threshold returns sparser graph.}
 
 \item{subsample.ratio}{0.8 is default. The recommended values are 10*sqrt(n)/n for n > 144 or 0.8 otherwise.}
 
 \item{rep.num}{the repetition number of subsampling for StARS eddge stability selection. The default value is 20.}
+
+\item{Rtol}{Desired accuracy when calculating the solution of bridge function in estimateR function.}
+
+\item{verbose}{If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.}
+
+\item{verboseR}{If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not when calculating rank-based correlation matrices is disabled. The defalut value is FALSE.}
 }
 \value{
 \code{SPRING} returns a data.frame containing
