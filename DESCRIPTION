@@ -21,7 +21,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
 Imports: mixedCCA, huge, pulsar
-Remotes: irinagain/mixedCCA, zdk123/pulsar
+Remotes: irinagain/mixedCCA
 Suggests: 
     testthat (>= 2.1.0)
 RoxygenNote: 6.1.1
