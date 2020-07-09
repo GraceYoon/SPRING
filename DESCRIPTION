@@ -1,6 +1,6 @@
 Package: SPRING
 Title: Semi-Parametric Rank-based approach for INference in Graphical model (SPRING)
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
     person(given = "Grace",
            family = "Yoon",
@@ -24,4 +24,4 @@ Imports: mixedCCA, SpiecEasi, huge, pulsar, rootSolve, mvtnorm, stats
 Remotes: irinagain/mixedCCA
 Suggests: 
     testthat (>= 2.1.0)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

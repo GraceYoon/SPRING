@@ -4,8 +4,16 @@
 \alias{hugeKmb}
 \title{Internal wrapper function to implement rank-based correlation to huge.mb function in "huge" package.}
 \usage{
-hugeKmb(data, lambda, type = "trunc", sym = "or", verbose = TRUE,
-  verboseR = TRUE, tol = 1e-06)
+hugeKmb(
+  data,
+  lambda,
+  type = "trunc",
+  sym = "or",
+  verbose = TRUE,
+  verboseR = TRUE,
+  Rmethod = "approx",
+  tol = 1e-06
+)
 }
 \arguments{
 \item{data}{n by p matrix data. usually through pulsar, data will receive subsamples.}
@@ -19,6 +27,8 @@ hugeKmb(data, lambda, type = "trunc", sym = "or", verbose = TRUE,
 \item{verbose}{If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.}
 
 \item{verboseR}{If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not is disabled. The defalut value is TRUE.}
+
+\item{Rmethod}{The calculation method of latent correlation. Either "original" method or "approx". If \code{Rmethod = "approx"}, multilinear approximation method is used, which is much faster than the original method. If \code{Rmethod = "original"}, optimization of the bridge inverse function is used. The default is "approx".}
 
 \item{tol}{Desired accuracy when calculating the solution of bridge function in estimateR function.}
 }

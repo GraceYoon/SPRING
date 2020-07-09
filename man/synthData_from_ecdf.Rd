@@ -4,8 +4,7 @@
 \alias{synthData_from_ecdf}
 \title{Synthetic data generator from real counts}
 \usage{
-synthData_from_ecdf(comm, mar = 2, Sigma, n, seed = 10010,
-  verbose = FALSE)
+synthData_from_ecdf(comm, mar = 2, Sigma, n, seed = 10010, verbose = FALSE)
 }
 \arguments{
 \item{comm}{community; a matrix of real count data that we want to simulate/sythesize. Samples are in rows and OTUs are in columns.}
@@ -31,12 +30,12 @@ This function generates synthetic count data based on empirical cumulative distr
 
 require(SpiecEasi)
 
-# goal is to generate synthetic data with prescribed graph structure.
+# goal is to generate synthetic data with a prescribed graph structure.
 # load real data "QMP" in SPRING package.
 data(QMP)
 set.seed(12345) # set the seed number for make_graph part.
-p1 = ncol(QMP)
-e1 = 2*p1 # number of edges are twice of the number of nodes/variables.
+p1 = ncol(QMP) # the number of nodes.
+e1 = 2*p1 # the number of edges is set as twice the number of nodes.
 gtype = "cluster"
 # available types in SpiecEasi: "band", "cluster", "scale_free", "erdos_renyi", "hub", "block".
 graph_p1 <- SpiecEasi::make_graph(gtype, p1, e1) # adjacency matrix. 1: edge, 0: no edge.
@@ -45,7 +44,7 @@ Cor1   <- cov2cor(SpiecEasi::prec2cov(Prec1)) # correlation matrix.
 
 X1_count <- synthData_from_ecdf(QMP, Sigma = Cor1, n = 100)
 # generate data of size n by p.
-# p = ncol(Cor1) = ncol (QMP) should hold.
+# p = ncol(Cor1) = ncol(QMP) should hold.
 # need to specify sample size n.
 
 

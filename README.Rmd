@@ -19,7 +19,12 @@ knitr::opts_chunk$set(
 
 The R package `SPRING` (Semi-Parametric Rank-based approach for INference in Graphical model) estimates sparse microbial association networks using rank-based correlation with sparse graphical modeling techniques. The corresponding reference is
 
-Yoon, Gaynanova and M&uuml;ller (2019) [Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data](https://www.frontiersin.org/articles/10.3389/fgene.2019.00516/full). *Frontiers in Genetics*, 10:516.
+Yoon G., Gaynanova  I. and M&uuml;ller C.L. (2019) [Microbial Networks in SPRING - Semi-parametric Rank-Based Correlation and Partial Correlation Estimation for Quantitative Microbiome Data](https://www.frontiersin.org/articles/10.3389/fgene.2019.00516/full). *Frontiers in Genetics*, 10:516.
+
+The faster version of latent correlation computation part is now fully available and implemented to the R package `SPRING`. The corresponding reference is available on arXiv: 
+
+Yoon G., M&uuml;ller C.L. and Gaynanova  I. [Fast computation of latent correlations](https://arxiv.org/abs/2006.13875). *arXiv*.
+
 
 ## Installation
 
@@ -34,8 +39,12 @@ library(SPRING)
 data("QMP") # load the data available from this package, containing 106 samples and 91 OTUs.
 
 # Apply SPRING on QMP data.
-fit.spring <- SPRING(QMP, quantitative = TRUE, lambdaseq = "data-specific", nlambda = 50, rep.num = 50)
-# This takes around 23 minutes. We are working on reducing the computation time (10/25/2019).
+fit.spring <- SPRING(QMP, Rmethod = "approx", quantitative = TRUE, 
+                     lambdaseq = "data-specific", nlambda = 50, rep.num = 50)
+# With Rmethod = "original", this takes around 23 minutes.
+# With Rmethod = "approx", this takes around 2.23 minutes. 
+# More details on the comparison of accuracy and speed ("original" vs. "approx")
+# are available on the above arXiv reference.
 
 # StARS-selected lambda index based on the threshold (default = 0.01)
 opt.K <- fit.spring$output$stars$opt.index
