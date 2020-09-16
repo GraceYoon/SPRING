@@ -85,7 +85,7 @@ SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio =
     fun <- hugeKmb
   }
 
-  out1.K_count <- pulsar::pulsar(qdat, fun = fun, fargs = list(lambda = lambdaseq, tol = Rtol, verbose = verbose, verboseR = verboseR), rep.num = rep.num, criterion = 'stars', seed = seed, ncores = ncores, thresh = thresh, subsample.ratio = subsample.ratio)
+  out1.K_count <- pulsar::pulsar(qdat, fun = fun, fargs = list(lambda = lambdaseq, Rmethod = Rmethod, tol = Rtol, verbose = verbose, verboseR = verboseR), rep.num = rep.num, criterion = 'stars', seed = seed, ncores = ncores, thresh = thresh, subsample.ratio = subsample.ratio)
 
   fit1.K_count <- pulsar::refit(out1.K_count)
 
