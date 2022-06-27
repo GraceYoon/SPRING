@@ -16,7 +16,7 @@
 #' @param Rtol Desired accuracy when calculating the solution of bridge function in estimateR function.
 #' @param verbose If \code{verbose = FALSE}, tracing information printing for HUGE (High-dimensional Undirected Graph Estimation) with a specified method (currently "mb" is only available) is disabled. The default value is TRUE.
 #' @param verboseR If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not when calculating rank-based correlation matrices is disabled. The defalut value is FALSE.
-#' @param Rmethod The calculation method of latent correlation. Either "original" method or "approx". If \code{Rmethod = "approx"}, multilinear approximation method is used, which is much faster than the original method. If \code{Rmethod = "original"}, optimization of the bridge inverse function is used. The default is "approx".
+#' @param Rmethod The calculation method of latent correlation. Either "original" method or "approx". If \code{Rmethod = "original"}, multilinear approximation method is used, which is much faster than the original method. If \code{Rmethod = "original"}, optimization of the bridge inverse function is used. The default is "approx".
 #'
 #' @return \code{SPRING} returns a data.frame containing
 #' \itemize{
@@ -52,7 +52,7 @@
 #'
 #' @example man/examples/ex.R
 #'
-SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio = 1e-2, nlambda = 20, lambdaseq = exp(seq(log(0.6), log(0.6*lambda.min.ratio), length.out = nlambda)), seed = 10010, ncores = 1, thresh = 0.1, subsample.ratio = 0.8, rep.num = 20, Rtol = 1e-6, verbose = TRUE, verboseR = FALSE, Rmethod = "approx"){
+SPRING <- function(data, quantitative = FALSE, method = "mb", lambda.min.ratio = 1e-2, nlambda = 20, lambdaseq = exp(seq(log(0.6), log(0.6*lambda.min.ratio), length.out = nlambda)), seed = 10010, ncores = 1, thresh = 0.1, subsample.ratio = 0.8, rep.num = 20, Rtol = 1e-6, verbose = TRUE, verboseR = FALSE, Rmethod = "original"){
 
   if (any(data < 0)) {
     stop("Negative values are detected, but either quantitative or compositional counts are expected.\n")
