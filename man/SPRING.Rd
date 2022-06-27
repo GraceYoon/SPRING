@@ -19,7 +19,7 @@ SPRING(
   Rtol = 1e-06,
   verbose = TRUE,
   verboseR = FALSE,
-  Rmethod = "approx"
+  Rmethod = "original"
 )
 }
 \arguments{
@@ -51,7 +51,7 @@ SPRING(
 
 \item{verboseR}{If \code{verboseR = FALSE}, printing information whetehr nearPD is used or not when calculating rank-based correlation matrices is disabled. The defalut value is FALSE.}
 
-\item{Rmethod}{The calculation method of latent correlation. Either "original" method or "approx". If \code{Rmethod = "approx"}, multilinear approximation method is used, which is much faster than the original method. If \code{Rmethod = "original"}, optimization of the bridge inverse function is used. The default is "approx".}
+\item{Rmethod}{The calculation method of latent correlation. Either "original" method or "approx". If \code{Rmethod = "original"}, multilinear approximation method is used, which is much faster than the original method. If \code{Rmethod = "original"}, optimization of the bridge inverse function is used. The default is "approx".}
 }
 \value{
 \code{SPRING} returns a data.frame containing

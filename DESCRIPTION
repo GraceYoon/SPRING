@@ -24,4 +24,4 @@ Imports: mixedCCA, SpiecEasi, huge, pulsar, rootSolve, mvtnorm, stats
 Remotes: irinagain/mixedCCA, zdk123/SpiecEasi
 Suggests: 
     testthat (>= 2.1.0)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
